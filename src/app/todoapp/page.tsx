@@ -10,7 +10,7 @@ export default function ToDoApp() {
     console.log("todos > >", todos)
 
     return (
-        <div>
+        <div className="my-9">
             <div className='mt-36'>
                 <CreateTaskForm mutate={mutate} />
             </div>
@@ -19,7 +19,6 @@ export default function ToDoApp() {
                 isLoading={isLoading}
                 mutate={mutate}
             />
-
 
         </div>
     )

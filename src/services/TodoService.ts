@@ -4,7 +4,7 @@ import { ITodo } from "@/interfaces/interfaces";
 
 export const GetAllTask = () => {
 
-  const { data, error, isLoading, mutate } = useSWR<ITodo[]>(
+  const { data, error, isLoading, mutate } = useSWR(
     "/api/task/getAll",
     fetcher,
     {
@@ -26,17 +26,22 @@ export const CreateTask = async (taskObj: ITodo) => {
 };
 
 export const UpdateTask = async (
-  id: number,
-  text: string,
-  deadline: string,
-  completed: boolean
+  task: any
 ): Promise<any> => {
+  const id = task._id
+  const content = task.content
+  const deadline = task.deadline
+  const completed = task.completed
+  console.log("update service", id,
+    content,
+    deadline,
+    completed)
   try {
-    const response = await fetch(`/task/update/${id}`, {
+    const response = await fetch(`/api/task/update/${id}`, {
       method: "PUT",
       body: JSON.stringify({
         id,
-        text,
+        content,
         deadline,
         completed,
       }),

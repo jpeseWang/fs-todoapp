@@ -1,19 +1,19 @@
 import { ITodo } from "@/interfaces/interfaces";
+import { TaskStatus } from "@/interfaces/enum";
 
 export const getTaskStatus = (todoObj: ITodo) => {
-    // const [remainingTime, setRemainingTime] = useState("");
+
     const deadline = todoObj.deadline
     const isCompleted = todoObj.completed
     let remainingTime = ""
     const deadlineTime = new Date(deadline).getTime();
-
     const currentTime = new Date().getTime();
     const timeDiff = deadlineTime - currentTime;
 
     if (timeDiff <= 0) {
-        remainingTime = "Overdue";
+        remainingTime = TaskStatus.Overdue;
     } else if (timeDiff !== 0 && isCompleted) {
-        remainingTime = "Finished";
+        remainingTime = TaskStatus.Completed;
     } else if (Number.isNaN(timeDiff)) {
         remainingTime = "No deadline";
     } else {
