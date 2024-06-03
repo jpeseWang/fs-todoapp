@@ -4,11 +4,7 @@ const { Schema } = mongoose;
 
 const taskSchema = new Schema(
   {
-    id: {
-      type: String,
-      require: true,
-    },
-    text: {
+    content: {
       type: String,
       require: true,
     },

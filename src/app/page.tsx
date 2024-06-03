@@ -1,10 +1,9 @@
-import { HomePage } from "@/components/Home/Home";
-import Image from "next/image";
+import ToDoApp from "./todoapp/page";
 
 export default function Home() {
   return (
     <>
-      <HomePage />
+      <ToDoApp />
     </>
   );
 }

@@ -1,16 +1,21 @@
 import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
-import { Todo } from "@/interfaces/interfaces";
+import { ITodo } from "@/interfaces/interfaces";
 
 export const GetAllTask = () => {
-  const { data, error, isLoading } = useSWR<Todo[]>(
+
+  const { data, error, isLoading, mutate } = useSWR<ITodo[]>(
     "/api/task/getAll",
-    fetcher
+    fetcher,
+    {
+      revalidateOnMount: true,
+      revalidateOnFocus: true
+    }
   );
-  return { todos: data, isLoading, isError: error };
+  return { todos: data, isLoading, isError: error, mutate };
 };
 
-export const CreateTask = async (taskObj: Todo) => {
+export const CreateTask = async (taskObj: ITodo) => {
   await fetch("/api/task/create", {
     method: "POST",
     headers: {
@@ -42,7 +47,7 @@ export const UpdateTask = async (
   }
 };
 
-export const DeleteTask = async (id: number): Promise<any> => {
+export const DeleteTask = async (id: any): Promise<any> => {
   try {
     await fetch(`/api/task/delete/${id}`, {
       method: "DELETE",
